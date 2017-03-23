@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+bin/
+.vscode/
+logs/
+
+*/sec/
+*/sec/*
+
+npm-debug.*

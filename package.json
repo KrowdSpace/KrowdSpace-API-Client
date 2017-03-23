@@ -1,0 +1,30 @@
+{
+  "name": "krowdspace-api-client",
+  "version": "0.0.1",
+  "description": "KrowdSpace API Client",
+  "main": "dist/ksc.js",
+  "scripts": {
+    "install": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "build": "browserify -e src/index.js -o dist/ksc.js -t [babelify]",
+    "buildwatch": "watchify -v -e src/index.js -o dist/ksc.js -t [babelify]"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrowdSpace/KrowdSpace-API-Client.git"
+  },
+  "author": "Ben Otter <benotter@me.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KrowdSpace/KrowdSpace-API-Client/issues"
+  },
+  "homepage": "https://github.com/KrowdSpace/KrowdSpace-API-Client#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-env": "^1.2.2",
+    "babelify": "^7.3.0",
+    "browserify": "^14.1.0",
+    "watchify": "^3.9.0"
+  }
+}
