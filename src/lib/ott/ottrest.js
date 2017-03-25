@@ -12,11 +12,15 @@ export default class RestClient
     /**@type {Array<XMLHttpRequest>} - Available http reqs.*/
     openPool = [];
 
-    /**@type {Array<XMLHttpRequest>} - In Use http reqs.*/
-    closedPool = [];
-
+    /**
+     * Creates an instance of RestClient.
+     * @param {Object} opts Options Object.
+     * 
+     * @memberOf RestClient
+     */
     constructor(opts)
     {
+        this.opts = opts;
         this.domain = opts.domain;
     }
 
@@ -26,7 +30,6 @@ export default class RestClient
 
         req.open(type, this.domain + url);
     }
-
 
     takeReq()
     {
@@ -38,6 +41,12 @@ export default class RestClient
             this.closedPool.push(req);
             return req;
         }
+    }
+
+    giveReq(req)
+    {
+        if(req)
+            this.openPool.push(req);
     }
 
     /**
