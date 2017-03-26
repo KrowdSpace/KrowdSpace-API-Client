@@ -27,8 +27,6 @@ export default class RequestPool
         else
         {
             let req = new XMLHttpRequest();
-            this.closedPool.push(req);
-
             return req;
         }
     }

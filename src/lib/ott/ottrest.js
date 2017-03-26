@@ -38,7 +38,7 @@ export default class RestClient
     {
         let req = this.reqPool.takeReq();
 
-        req.open(type, this.domain + url);
+        req.open(type, `http://${this.domain + url}`);
 
         req.withCredentials = true;
         req.responseType = "json";
@@ -48,7 +48,7 @@ export default class RestClient
         {
             let res = typeof req.response == 'string' ? this.J2O(req.response) : req.response;
 
-            if(res)
+            if(res && cb)
                 cb(res);
 
             req.removeEventListener('load', onLd);

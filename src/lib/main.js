@@ -9,3 +9,9 @@ const opts = {
 const rc = new RestClient(opts);
 
 export const users = rc.addURL(UserAPI);
+
+
+export function setDomain(domain)
+{
+    rc.domain = domain;
+}

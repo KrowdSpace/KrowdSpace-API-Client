@@ -26,8 +26,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var UserAPI = function (_RestUrl) {
-    _inherits(UserAPI, _RestUrl);
+var UserAPI = function (_RestURL) {
+    _inherits(UserAPI, _RestURL);
 
     function UserAPI() {
         var _ref;
@@ -50,9 +50,7 @@ var UserAPI = function (_RestUrl) {
         }
     }, {
         key: 'login',
-        value: function login(user, pass, cb) {
-            var stayLog = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-
+        value: function login(user, pass, stayLog, cb) {
             this.post('login', { USERNAME: user, PASSWORD: pass, STAYLOGGED: stayLog }, cb);
         }
     }, {
@@ -63,7 +61,7 @@ var UserAPI = function (_RestUrl) {
     }]);
 
     return UserAPI;
-}(_ottrest.RestUrl);
+}(_ottrest.RestURL);
 
 exports.default = UserAPI;
 
@@ -74,6 +72,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.users = undefined;
+exports.setDomain = setDomain;
 
 var _ottrest = require('./ott/ottrest');
 
@@ -92,6 +91,10 @@ var opts = {
 var rc = new _ottrest2.default(opts);
 
 var users = exports.users = rc.addURL(_users2.default);
+
+function setDomain(domain) {
+    rc.domain = domain;
+}
 
 },{"./api/users":2,"./ott/ottrest":5}],4:[function(require,module,exports){
 "use strict";
@@ -133,8 +136,6 @@ var RequestPool = function () {
         value: function takeReq() {
             if (this.openPool.length > 0) return this.openPool.pop();else {
                 var req = new XMLHttpRequest();
-                this.closedPool.push(req);
-
                 return req;
             }
         }
@@ -210,7 +211,7 @@ var RestClient = function () {
 
             var req = this.reqPool.takeReq();
 
-            req.open(type, this.domain + url);
+            req.open(type, 'http://' + (this.domain + url));
 
             req.withCredentials = true;
             req.responseType = "json";
@@ -219,7 +220,7 @@ var RestClient = function () {
             var onLd = function onLd(e) {
                 var res = typeof req.response == 'string' ? _this.J2O(req.response) : req.response;
 
-                if (res) cb(res);
+                if (res && cb) cb(res);
 
                 req.removeEventListener('load', onLd);
                 _this.reqPool.giveReq(req);

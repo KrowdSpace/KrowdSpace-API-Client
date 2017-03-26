@@ -1,6 +1,6 @@
-import {RestUrl} from '../ott/ottrest';
+import {RestURL} from '../ott/ottrest';
 
-export default class UserAPI extends RestUrl 
+export default class UserAPI extends RestURL 
 {
     scope = "/users/"
     check(cb)
@@ -8,7 +8,7 @@ export default class UserAPI extends RestUrl
         this.post('login', {CHECK: true}, cb);
     }
 
-    login(user, pass, cb, stayLog = true)
+    login(user, pass, stayLog, cb)
     {
         this.post('login', {USERNAME: user, PASSWORD: pass, STAYLOGGED: stayLog}, cb);
     }
