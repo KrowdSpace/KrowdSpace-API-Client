@@ -1,4 +1,17 @@
-export function login() {}
-export function logout() {}
+import {RestUrl} from '../ott/ottrest';
 
-export function check() {}
+class UserAPI extends RestUrl 
+{
+    url = "/users/"
+    check()
+    {
+
+    }
+
+    login(user, pass, cb)
+    {
+
+    }
+
+
+}

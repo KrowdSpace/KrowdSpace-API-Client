@@ -4,49 +4,25 @@
  * (C) Ben Otter (Benjamin McLean), 2017
  */
 
+import RequestPool from './ottreq';
+
 /**
  * Ott's RESTful Client Abstractor
  */
 export default class RestClient
 {
-    /**@type {Array<XMLHttpRequest>} - Available http reqs.*/
-    openPool = [];
-
     /**
-     * Creates an instance of RestClient.
-     * @param {Object} opts Options Object.
-     * 
+     * @type {RequestPool} reqPool - Request Pool
      * @memberOf RestClient
      */
+    reqPool = null;
+
     constructor(opts)
     {
         this.opts = opts;
         this.domain = opts.domain;
-    }
 
-    request(url, type, data, cb)
-    {
-        let req = this.takeReq();
-
-        req.open(type, this.domain + url);
-    }
-
-    takeReq()
-    {
-        if(this.openPool.length > 0)
-            return this.openPool.pop();
-        else
-        {
-            let req = new XMLHttpRequest();
-            this.closedPool.push(req);
-            return req;
-        }
-    }
-
-    giveReq(req)
-    {
-        if(req)
-            this.openPool.push(req);
+        this.reqPool = new RequestPool(opts);
     }
 
     /**
@@ -55,21 +31,61 @@ export default class RestClient
      */
     addURL(urlClass)
     {
+        return new urlClass(this);
+    }
 
+    request(url, type, data, cb)
+    {
+        let req = this.reqPool.takeReq();
+
+        req.open(type, this.domain + url);
+
+        req.withCredentials = true;
+        req.responseType = "json";
+        req.setRequestHeader('Content-Type', 'application/json');
+        
+        let onLd = (e)=>
+        {
+            let res = typeof req.response == 'string' ? this.J2O(req.response) : req.response;
+
+            if(res)
+                cb(res);
+
+            req.removeEventListener('load', onLd);
+            this.reqPool.giveReq(req);
+        };
+
+        req.addEventListener('load', onLd);
+
+        req.send(JSON.stringify(data));
+    }
+
+    J2O(json)
+    {
+        let ret = null;
+        try{ret = JSON.parse(json)}catch(e){};
+        return ret;
     }
 }
 
 export class RestURL
 {
-    url = "";
+    scope = "/";
 
-    constructor()
+    constructor(restC)
     {
-
+        this.restC = restC;
     }
 
-    get(dataObj, cb) {}
-    post(data, cb) {}
+    get(url, data, cb)
+    {
+        this.restC.request(this.scope + url, 'get', data, cb);
+    }
+
+    post(url, data, cb)
+    {
+        this.restC.request(this.scope + url, 'post', data, cb);
+    }
 
     //Mostly Unused
     put(){}
