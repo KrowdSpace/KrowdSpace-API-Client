@@ -8,13 +8,18 @@ export default class UserAPI extends RestURL
         this.post('login', {CHECK: true}, cb);
     }
 
-    login(user, pass, stayLog, cb)
+    login(USERNAME, PASSWORD, STAYLOGGED, cb)
     {
-        this.post('login', {USERNAME: user, PASSWORD: pass, STAYLOGGED: stayLog}, cb);
+        this.post('login', {USERNAME, PASSWORD, STAYLOGGED}, cb);
     }
 
-    getDetails(userID, cb)
+    user(USERID, cb)
     {
-        this.post(userID, {}, cb);
+        this.post('user', {USERID}, cb);
+    }
+
+    set_user(USERID, DATA, cb)
+    {
+        this.post('user', {SET: TRUE, USERID, DATA}, cb);
     }
 }

@@ -50,13 +50,18 @@ var UserAPI = function (_RestURL) {
         }
     }, {
         key: 'login',
-        value: function login(user, pass, stayLog, cb) {
-            this.post('login', { USERNAME: user, PASSWORD: pass, STAYLOGGED: stayLog }, cb);
+        value: function login(USERNAME, PASSWORD, STAYLOGGED, cb) {
+            this.post('login', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED }, cb);
         }
     }, {
-        key: 'getDetails',
-        value: function getDetails(userID, cb) {
-            this.post(userID, {}, cb);
+        key: 'user',
+        value: function user(USERID, cb) {
+            this.post('user', { USERID: USERID }, cb);
+        }
+    }, {
+        key: 'set_user',
+        value: function set_user(USERID, DATA, cb) {
+            this.post('user', { SET: TRUE, USERID: USERID, DATA: DATA }, cb);
         }
     }]);
 
