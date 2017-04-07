@@ -9,7 +9,119 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 window.krowdspace = ks;
 
-},{"./lib/main.js":3}],2:[function(require,module,exports){
+},{"./lib/main.js":5}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ottrest = require('../ott/ottrest');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProjectsAPI = function (_RestURL) {
+    _inherits(ProjectsAPI, _RestURL);
+
+    function ProjectsAPI() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, ProjectsAPI);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProjectsAPI.__proto__ || Object.getPrototypeOf(ProjectsAPI)).call.apply(_ref, [this].concat(args))), _this), _this.scope = '/projects/', _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(ProjectsAPI, [{
+        key: 'project',
+        value: function project(PROJECTID, cb) {
+            this.post('projects', { PROJECTID: PROJECTID }, cb);
+        }
+    }]);
+
+    return ProjectsAPI;
+}(_ottrest.RestURL);
+
+exports.default = ProjectsAPI;
+
+},{"../ott/ottrest":7}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ottrest = require('../ott/ottrest');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RegisterAPI = function (_RestURL) {
+    _inherits(RegisterAPI, _RestURL);
+
+    function RegisterAPI() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, RegisterAPI);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = RegisterAPI.__proto__ || Object.getPrototypeOf(RegisterAPI)).call.apply(_ref, [this].concat(args))), _this), _this.scope = '/register/', _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(RegisterAPI, [{
+        key: 'user',
+        value: function user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER, cb) {
+            this.post('user', { FNAME: FNAME, LNAME: LNAME, USERNAME: USERNAME, EMAIL: EMAIL, PASSWORD: PASSWORD, KS_USER: KS_USER, IG_USER: IG_USER }, cb);
+        }
+    }, {
+        key: 'project',
+        value: function project(CAT, URL, REWARD, cb) {
+            this.post('project', { NAME: NAME, URL: URL }, cb);
+        }
+    }, {
+        key: 'email_list',
+        value: function email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID, cb) {
+            this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, IGUSER: IGUSER, PVALID: PVALID }, cb);
+        }
+    }, {
+        key: 'cotact_us',
+        value: function cotact_us(FNAME, LNAME, EMAIL, COMMENT, cb) {
+            this.post('contact_us', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, COMMENT: COMMENT }, cb);
+        }
+    }, {
+        key: 'verify',
+        value: function verify(VERIFYCODE, cb) {
+            this.post('verify', { VERIFYCODE: VERIFYCODE }, cb);
+        }
+    }]);
+
+    return RegisterAPI;
+}(_ottrest.RestURL);
+
+exports.default = RegisterAPI;
+
+},{"../ott/ottrest":7}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -70,13 +182,13 @@ var UserAPI = function (_RestURL) {
 
 exports.default = UserAPI;
 
-},{"../ott/ottrest":5}],3:[function(require,module,exports){
+},{"../ott/ottrest":7}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.users = undefined;
+exports.projects = exports.register = exports.users = undefined;
 exports.setDomain = setDomain;
 
 var _ottrest = require('./ott/ottrest');
@@ -87,6 +199,14 @@ var _users = require('./api/users');
 
 var _users2 = _interopRequireDefault(_users);
 
+var _register = require('./api/register');
+
+var _register2 = _interopRequireDefault(_register);
+
+var _projects = require('./api/projects');
+
+var _projects2 = _interopRequireDefault(_projects);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var opts = {
@@ -95,13 +215,15 @@ var opts = {
 
 var rc = new _ottrest2.default(opts);
 
-var users = exports.users = rc.addURL(_users2.default);
-
 function setDomain(domain) {
     rc.domain = domain;
 }
 
-},{"./api/users":2,"./ott/ottrest":5}],4:[function(require,module,exports){
+var users = exports.users = rc.addURL(_users2.default);
+var register = exports.register = rc.addURL(_register2.default);
+var projects = exports.projects = rc.addURL(_projects2.default);
+
+},{"./api/projects":2,"./api/register":3,"./api/users":4,"./ott/ottrest":7}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -156,7 +278,7 @@ var RequestPool = function () {
 
 exports.default = RequestPool;
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -284,4 +406,4 @@ var RestURL = exports.RestURL = function () {
     return RestURL;
 }();
 
-},{"./ottreq":4}]},{},[1]);
+},{"./ottreq":6}]},{},[1]);

@@ -4,12 +4,12 @@ export default class RegisterAPI extends RestURL
 {
     scope = '/register/';
 
-    user(USERNAME, EMAIL, PASSWORD, cb)
+    user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER, cb)
     {
-        this.post('user', { USERNAME, EMAIL, PASSWORD }, cb);
+        this.post('user', { FNAME, LNAME, USERNAME, EMAIL, PASSWORD, KS_USER, IG_USER }, cb);
     }
 
-    project(NAME, URL, cb)
+    project(CAT, URL, REWARD, cb)
     {
         this.post('project', { NAME, URL }, cb);
     }
