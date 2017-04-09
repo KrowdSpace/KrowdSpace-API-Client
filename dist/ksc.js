@@ -105,8 +105,8 @@ var RegisterAPI = function (_RestURL) {
             this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, IGUSER: IGUSER, PVALID: PVALID }, cb);
         }
     }, {
-        key: 'cotact_us',
-        value: function cotact_us(FNAME, LNAME, EMAIL, COMMENT, cb) {
+        key: 'contact_us',
+        value: function contact_us(FNAME, LNAME, EMAIL, COMMENT, cb) {
             this.post('contact_us', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, COMMENT: COMMENT }, cb);
         }
     }, {
