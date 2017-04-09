@@ -19,7 +19,7 @@ export default class RegisterAPI extends RestURL
         this.post('email_list', { FNAME, LNAME, EMAIL, IGUSER, PVALID }, cb);
     }
 
-    cotact_us(FNAME, LNAME, EMAIL, COMMENT, cb)
+    contact_us(FNAME, LNAME, EMAIL, COMMENT, cb)
     {
         this.post('contact_us', { FNAME, LNAME, EMAIL, COMMENT }, cb);
     }
