@@ -102,7 +102,7 @@ var RegisterAPI = function (_RestURL) {
     }, {
         key: 'email_list',
         value: function email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID, cb) {
-            this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, IGUSER: IGUSER, PVALID: PVALID }, cb);
+            this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, KSUSER: KSUSER, IGUSER: IGUSER, PVALID: PVALID }, cb);
         }
     }, {
         key: 'contact_us',
