@@ -168,12 +168,17 @@ var UserAPI = function (_RestURL) {
     }, {
         key: 'user',
         value: function user(USERID, cb) {
-            this.post('user', { USERID: USERID }, cb);
+            if (typeof USERID === "function" && !cb) {
+                cb = USERID;
+                USERID = "";
+            }
+
+            this.post('user', { USERID: USERID, TYPE: "GETOWN" }, cb);
         }
     }, {
         key: 'set_user',
-        value: function set_user(USERID, DATA, cb) {
-            this.post('user', { SET: TRUE, USERID: USERID, DATA: DATA }, cb);
+        value: function set_user(DATA, cb) {
+            this.post('user', { TYPE: "SETOWN", USERID: USERID, DATA: DATA }, cb);
         }
     }]);
 

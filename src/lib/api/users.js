@@ -15,11 +15,17 @@ export default class UserAPI extends RestURL
 
     user(USERID, cb)
     {
-        this.post('user', {USERID}, cb);
+        if(typeof USERID === "function" && !cb)
+        {
+            cb = USERID;
+            USERID = "";
+        }
+            
+        this.post('user', {USERID, TYPE: "GETOWN"}, cb);
     }
 
-    set_user(USERID, DATA, cb)
+    set_user(DATA, cb)
     {
-        this.post('user', {SET: TRUE, USERID, DATA}, cb);
+        this.post('user', {TYPE: "SETOWN", USERID, DATA}, cb);
     }
 }
