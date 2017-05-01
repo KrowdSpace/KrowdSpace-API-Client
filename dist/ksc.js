@@ -46,7 +46,7 @@ var ProjectsAPI = function (_RestURL) {
     _createClass(ProjectsAPI, [{
         key: 'project',
         value: function project(PROJECTID, cb) {
-            this.post('projects', { PROJECTID: PROJECTID }, cb);
+            return this.post('projects', { PROJECTID: PROJECTID }, cb);
         }
     }]);
 
@@ -91,28 +91,28 @@ var RegisterAPI = function (_RestURL) {
 
     _createClass(RegisterAPI, [{
         key: 'user',
-        value: function user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER, cb) {
-            this.post('user', { FNAME: FNAME, LNAME: LNAME, USERNAME: USERNAME, EMAIL: EMAIL, PASSWORD: PASSWORD, KS_USER: KS_USER, IG_USER: IG_USER }, cb);
+        value: function user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER) {
+            return this.post('user', { FNAME: FNAME, LNAME: LNAME, USERNAME: USERNAME, EMAIL: EMAIL, PASSWORD: PASSWORD, KS_USER: KS_USER, IG_USER: IG_USER }, cb);
         }
     }, {
         key: 'project',
-        value: function project(CAT, URL, REWARD, cb) {
-            this.post('project', { NAME: NAME, URL: URL }, cb);
+        value: function project(CAT, URL, REWARD) {
+            return this.post('project', { NAME: NAME, URL: URL });
         }
     }, {
         key: 'email_list',
-        value: function email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID, cb) {
-            this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, KSUSER: KSUSER, IGUSER: IGUSER, PVALID: PVALID }, cb);
+        value: function email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID) {
+            return this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, KSUSER: KSUSER, IGUSER: IGUSER, PVALID: PVALID }, cb);
         }
     }, {
         key: 'contact_us',
         value: function contact_us(FNAME, LNAME, EMAIL, COMMENT, cb) {
-            this.post('contact_us', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, COMMENT: COMMENT }, cb);
+            return this.post('contact_us', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, COMMENT: COMMENT });
         }
     }, {
         key: 'verify',
         value: function verify(VERIFYCODE, cb) {
-            this.post('verify', { VERIFYCODE: VERIFYCODE }, cb);
+            return this.post('verify', { VERIFYCODE: VERIFYCODE });
         }
     }]);
 
@@ -158,12 +158,12 @@ var UserAPI = function (_RestURL) {
     _createClass(UserAPI, [{
         key: 'check',
         value: function check(cb) {
-            this.post('login', { CHECK: true }, cb);
+            return this.post('login', { CHECK: true });
         }
     }, {
         key: 'login',
-        value: function login(USERNAME, PASSWORD, STAYLOGGED, cb) {
-            this.post('login', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED }, cb);
+        value: function login(USERNAME, PASSWORD, STAYLOGGED) {
+            return this.post('login', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED });
         }
     }, {
         key: 'user',
@@ -173,12 +173,12 @@ var UserAPI = function (_RestURL) {
                 USERID = "";
             }
 
-            this.post('user', { USERID: USERID, TYPE: "GETOWN" }, cb);
+            return this.post('user', { USERID: USERID, TYPE: "GETOWN" }, cb);
         }
     }, {
         key: 'set_user',
         value: function set_user(DATA, cb) {
-            this.post('user', { TYPE: "SETOWN", USERID: USERID, DATA: DATA }, cb);
+            return this.post('user', { TYPE: "SETOWN", USERID: USERID, DATA: DATA }, cb);
         }
     }]);
 
@@ -338,29 +338,39 @@ var RestClient = function () {
         }
     }, {
         key: 'request',
-        value: function request(url, type, data, cb) {
+        value: function request(url, type, data) {
             var _this = this;
 
-            var req = this.reqPool.takeReq();
+            return new Promise(function (resolve, reject) {
+                var req = _this.reqPool.takeReq();
 
-            req.open(type, 'http://' + (this.domain + url));
+                req.open(type, 'http://' + (_this.domain + url));
 
-            req.withCredentials = true;
-            req.responseType = "json";
-            req.setRequestHeader('Content-Type', 'application/json');
+                req.withCredentials = true;
+                req.responseType = "json";
+                req.setRequestHeader('Content-Type', 'application/json');
 
-            var onLd = function onLd(e) {
-                var res = typeof req.response == 'string' ? _this.J2O(req.response) : req.response;
+                var onLd = function onLd(e) {
+                    var res = typeof req.response == 'string' ? _this.J2O(req.response) : req.response;
 
-                if (res && cb) cb(res);
+                    req.removeEventListener('load', onLd);
+                    _this.reqPool.giveReq(req);
 
-                req.removeEventListener('load', onLd);
-                _this.reqPool.giveReq(req);
-            };
+                    if (res && res.success) resolve(res);else reject(res);
+                };
 
-            req.addEventListener('load', onLd);
+                var onErr = function onErr(e) {
+                    req.removeEventListener('error', onLd);
+                    _this.reqPool.giveReq(req);
 
-            req.send(JSON.stringify(data));
+                    reject({ error: true });
+                };
+
+                req.addEventListener('load', onLd);
+                req.addEventListener('error', onErr);
+
+                req.send(JSON.stringify(data));
+            });
         }
     }, {
         key: 'J2O',
@@ -395,7 +405,7 @@ var RestURL = exports.RestURL = function () {
     }, {
         key: 'post',
         value: function post(url, data, cb) {
-            this.restC.request(this.scope + url, 'post', data, cb);
+            return this.restC.request(this.scope + url, 'post', data);
         }
 
         //Mostly Unused

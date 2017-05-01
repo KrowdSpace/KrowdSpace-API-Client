@@ -4,28 +4,28 @@ export default class RegisterAPI extends RestURL
 {
     scope = '/register/';
 
-    user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER, cb)
+    user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER)
     {
-        this.post('user', { FNAME, LNAME, USERNAME, EMAIL, PASSWORD, KS_USER, IG_USER }, cb);
+        return this.post('user', { FNAME, LNAME, USERNAME, EMAIL, PASSWORD, KS_USER, IG_USER }, cb);
     }
 
-    project(CAT, URL, REWARD, cb)
+    project(CAT, URL, REWARD)
     {
-        this.post('project', { NAME, URL }, cb);
+        return this.post('project', { NAME, URL });
     }
 
-    email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID, cb)
+    email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID)
     {
-        this.post('email_list', { FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID }, cb);
+        return this.post('email_list', { FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID }, cb);
     }
 
     contact_us(FNAME, LNAME, EMAIL, COMMENT, cb)
     {
-        this.post('contact_us', { FNAME, LNAME, EMAIL, COMMENT }, cb);
+        return this.post('contact_us', { FNAME, LNAME, EMAIL, COMMENT });
     }
 
     verify(VERIFYCODE, cb)
     {
-        this.post('verify', { VERIFYCODE }, cb);
+        return this.post('verify', { VERIFYCODE });
     }
 }

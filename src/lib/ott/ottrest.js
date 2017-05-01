@@ -34,30 +34,44 @@ export default class RestClient
         return new urlClass(this);
     }
 
-    request(url, type, data, cb)
+    request(url, type, data)
     {
-        let req = this.reqPool.takeReq();
-
-        req.open(type, `http://${this.domain + url}`);
-
-        req.withCredentials = true;
-        req.responseType = "json";
-        req.setRequestHeader('Content-Type', 'application/json');
-        
-        let onLd = (e)=>
+        return new Promise((resolve, reject)=>
         {
-            let res = typeof req.response == 'string' ? this.J2O(req.response) : req.response;
+            let req = this.reqPool.takeReq();
 
-            if(res && cb)
-                cb(res);
+            req.open(type, `http://${this.domain + url}`);
 
-            req.removeEventListener('load', onLd);
-            this.reqPool.giveReq(req);
-        };
+            req.withCredentials = true;
+            req.responseType = "json";
+            req.setRequestHeader('Content-Type', 'application/json');
+            
+            let onLd = (e)=>
+            {
+                let res = typeof req.response == 'string' ? this.J2O(req.response) : req.response;
 
-        req.addEventListener('load', onLd);
+                req.removeEventListener('load', onLd);
+                this.reqPool.giveReq(req);
 
-        req.send(JSON.stringify(data));
+                if(res && res.success) 
+                    resolve(res);
+                else 
+                    reject(res);
+            };
+
+            let onErr = (e)=>
+            {
+                req.removeEventListener('error', onLd);
+                this.reqPool.giveReq(req);
+
+                reject({error:true});
+            };
+
+            req.addEventListener('load', onLd);
+            req.addEventListener('error', onErr);
+
+            req.send(JSON.stringify(data));
+        });
     }
 
     J2O(json)
@@ -84,7 +98,7 @@ export class RestURL
 
     post(url, data, cb)
     {
-        this.restC.request(this.scope + url, 'post', data, cb);
+        return this.restC.request(this.scope + url, 'post', data);
     }
 
     //Mostly Unused

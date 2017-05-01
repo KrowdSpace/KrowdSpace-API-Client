@@ -6,6 +6,6 @@ export default class ProjectsAPI extends RestURL
     
     project(PROJECTID, cb)
     {
-        this.post('projects', {PROJECTID}, cb);
+        return this.post('projects', {PROJECTID}, cb);
     }
 }
