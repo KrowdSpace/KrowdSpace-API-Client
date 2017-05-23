@@ -3,7 +3,7 @@ import {RestURL} from '../ott/ottrest';
 export default class UserAPI extends RestURL 
 {
     scope = "/users/"
-    check(cb)
+    check()
     {
         return this.post('login', {CHECK: true});
     }
@@ -13,7 +13,7 @@ export default class UserAPI extends RestURL
         return this.post('login', {USERNAME, PASSWORD, STAYLOGGED});
     }
 
-    user(USERID, cb)
+    user(USERID)
     {
         if(typeof USERID === "function" && !cb)
         {
@@ -21,11 +21,11 @@ export default class UserAPI extends RestURL
             USERID = "";
         }
             
-        return this.post('user', {USERID, TYPE: "GETOWN"}, cb);
+        return this.post('user', {USERID, TYPE: "GETOWN"});
     }
 
-    set_user(DATA, cb)
+    set_user(DATA)
     {
-        return this.post('user', {TYPE: "SETOWN", USERID, DATA}, cb);
+        return this.post('user', {TYPE: "SETOWN", USERID, DATA});
     }
 }

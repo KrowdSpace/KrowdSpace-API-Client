@@ -4,8 +4,8 @@ export default class ProjectsAPI extends RestURL
 {
     scope = '/projects/';
     
-    project(PROJECTID, cb)
+    project(PROJECTID)
     {
-        return this.post('projects', {PROJECTID}, cb);
+        return this.post('projects', {PROJECTID});
     }
 }

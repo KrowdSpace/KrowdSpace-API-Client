@@ -45,8 +45,8 @@ var ProjectsAPI = function (_RestURL) {
 
     _createClass(ProjectsAPI, [{
         key: 'project',
-        value: function project(PROJECTID, cb) {
-            return this.post('projects', { PROJECTID: PROJECTID }, cb);
+        value: function project(PROJECTID) {
+            return this.post('projects', { PROJECTID: PROJECTID });
         }
     }]);
 
@@ -92,7 +92,7 @@ var RegisterAPI = function (_RestURL) {
     _createClass(RegisterAPI, [{
         key: 'user',
         value: function user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER) {
-            return this.post('user', { FNAME: FNAME, LNAME: LNAME, USERNAME: USERNAME, EMAIL: EMAIL, PASSWORD: PASSWORD, KS_USER: KS_USER, IG_USER: IG_USER }, cb);
+            return this.post('user', { FNAME: FNAME, LNAME: LNAME, USERNAME: USERNAME, EMAIL: EMAIL, PASSWORD: PASSWORD, KS_USER: KS_USER, IG_USER: IG_USER });
         }
     }, {
         key: 'project',
@@ -102,11 +102,11 @@ var RegisterAPI = function (_RestURL) {
     }, {
         key: 'email_list',
         value: function email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID) {
-            return this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, KSUSER: KSUSER, IGUSER: IGUSER, PVALID: PVALID }, cb);
+            return this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, KSUSER: KSUSER, IGUSER: IGUSER, PVALID: PVALID });
         }
     }, {
         key: 'contact_us',
-        value: function contact_us(FNAME, LNAME, EMAIL, COMMENT, cb) {
+        value: function contact_us(FNAME, LNAME, EMAIL, COMMENT) {
             return this.post('contact_us', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, COMMENT: COMMENT });
         }
     }, {
@@ -157,7 +157,7 @@ var UserAPI = function (_RestURL) {
 
     _createClass(UserAPI, [{
         key: 'check',
-        value: function check(cb) {
+        value: function check() {
             return this.post('login', { CHECK: true });
         }
     }, {
@@ -167,18 +167,18 @@ var UserAPI = function (_RestURL) {
         }
     }, {
         key: 'user',
-        value: function user(USERID, cb) {
+        value: function user(USERID) {
             if (typeof USERID === "function" && !cb) {
                 cb = USERID;
                 USERID = "";
             }
 
-            return this.post('user', { USERID: USERID, TYPE: "GETOWN" }, cb);
+            return this.post('user', { USERID: USERID, TYPE: "GETOWN" });
         }
     }, {
         key: 'set_user',
-        value: function set_user(DATA, cb) {
-            return this.post('user', { TYPE: "SETOWN", USERID: USERID, DATA: DATA }, cb);
+        value: function set_user(DATA) {
+            return this.post('user', { TYPE: "SETOWN", USERID: USERID, DATA: DATA });
         }
     }]);
 

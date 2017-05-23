@@ -6,7 +6,7 @@ export default class RegisterAPI extends RestURL
 
     user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER)
     {
-        return this.post('user', { FNAME, LNAME, USERNAME, EMAIL, PASSWORD, KS_USER, IG_USER }, cb);
+        return this.post('user', { FNAME, LNAME, USERNAME, EMAIL, PASSWORD, KS_USER, IG_USER });
     }
 
     project(CAT, URL, REWARD)
@@ -16,10 +16,10 @@ export default class RegisterAPI extends RestURL
 
     email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID)
     {
-        return this.post('email_list', { FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID }, cb);
+        return this.post('email_list', { FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID });
     }
 
-    contact_us(FNAME, LNAME, EMAIL, COMMENT, cb)
+    contact_us(FNAME, LNAME, EMAIL, COMMENT)
     {
         return this.post('contact_us', { FNAME, LNAME, EMAIL, COMMENT });
     }
