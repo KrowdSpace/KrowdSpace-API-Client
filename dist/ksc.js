@@ -48,6 +48,11 @@ var ProjectsAPI = function (_RestURL) {
         value: function project(PROJECTID) {
             return this.post('projects', { PROJECTID: PROJECTID });
         }
+    }, {
+        key: 'set_project',
+        value: function set_project(PROJECTID, DATA) {
+            return this.post('set_project', { PROJECTID: PROJECTID, DATA: DATA });
+        }
     }]);
 
     return ProjectsAPI;
@@ -96,8 +101,8 @@ var RegisterAPI = function (_RestURL) {
         }
     }, {
         key: 'project',
-        value: function project(CAT, URL, REWARD) {
-            return this.post('project', { NAME: NAME, URL: URL });
+        value: function project(data) {
+            return this.post('project', data);
         }
     }, {
         key: 'email_list',
