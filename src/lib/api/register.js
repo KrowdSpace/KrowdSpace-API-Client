@@ -9,9 +9,9 @@ export default class RegisterAPI extends RestURL
         return this.post('user', { FNAME, LNAME, USERNAME, EMAIL, PASSWORD, KS_USER, IG_USER });
     }
 
-    project(CAT, URL, REWARD)
+    project(data)
     {
-        return this.post('project', { NAME, URL });
+        return this.post('project', data);
     }
 
     email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID)

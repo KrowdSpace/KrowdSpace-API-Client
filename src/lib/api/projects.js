@@ -8,4 +8,8 @@ export default class ProjectsAPI extends RestURL
     {
         return this.post('projects', {PROJECTID});
     }
+    set_project(PROJECTID, DATA)
+    {
+        return this.post('set_project', {PROJECTID, DATA});
+    }
 }
