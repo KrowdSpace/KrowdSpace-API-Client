@@ -2,7 +2,7 @@ import {RestURL} from '../ott/ottrest';
 
 export default class RegisterAPI extends RestURL 
 {
-    scope = '/register/';
+    scope = '/v1/register/';
 
     user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER)
     {

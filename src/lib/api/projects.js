@@ -2,7 +2,7 @@ import {RestURL} from '../ott/ottrest';
 
 export default class ProjectsAPI extends RestURL 
 {
-    scope = '/projects/';
+    scope = '/v1/projects/';
     
     project(PROJECTID)
     {

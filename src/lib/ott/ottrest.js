@@ -93,7 +93,7 @@ export class RestURL
 
     get(url, data, cb)
     {
-        this.restC.request(this.scope + url, 'get', data, cb);
+        return this.restC.request(this.scope + url, 'get', data);
     }
 
     post(url, data, cb)

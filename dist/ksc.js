@@ -9,7 +9,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 window.krowdspace = ks;
 
-},{"./lib/main.js":5}],2:[function(require,module,exports){
+},{"./lib/main.js":6}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40,7 +40,7 @@ var ProjectsAPI = function (_RestURL) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProjectsAPI.__proto__ || Object.getPrototypeOf(ProjectsAPI)).call.apply(_ref, [this].concat(args))), _this), _this.scope = '/projects/', _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ProjectsAPI.__proto__ || Object.getPrototypeOf(ProjectsAPI)).call.apply(_ref, [this].concat(args))), _this), _this.scope = '/v1/projects/', _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(ProjectsAPI, [{
@@ -60,7 +60,7 @@ var ProjectsAPI = function (_RestURL) {
 
 exports.default = ProjectsAPI;
 
-},{"../ott/ottrest":7}],3:[function(require,module,exports){
+},{"../ott/ottrest":8}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -91,7 +91,7 @@ var RegisterAPI = function (_RestURL) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = RegisterAPI.__proto__ || Object.getPrototypeOf(RegisterAPI)).call.apply(_ref, [this].concat(args))), _this), _this.scope = '/register/', _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = RegisterAPI.__proto__ || Object.getPrototypeOf(RegisterAPI)).call.apply(_ref, [this].concat(args))), _this), _this.scope = '/v1/register/', _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(RegisterAPI, [{
@@ -126,7 +126,7 @@ var RegisterAPI = function (_RestURL) {
 
 exports.default = RegisterAPI;
 
-},{"../ott/ottrest":7}],4:[function(require,module,exports){
+},{"../ott/ottrest":8}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -157,18 +157,13 @@ var UserAPI = function (_RestURL) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = UserAPI.__proto__ || Object.getPrototypeOf(UserAPI)).call.apply(_ref, [this].concat(args))), _this), _this.scope = "/users/", _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = UserAPI.__proto__ || Object.getPrototypeOf(UserAPI)).call.apply(_ref, [this].concat(args))), _this), _this.scope = "/v1/users/", _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(UserAPI, [{
         key: 'check',
         value: function check() {
             return this.post('login', { CHECK: true });
-        }
-    }, {
-        key: 'login',
-        value: function login(USERNAME, PASSWORD, STAYLOGGED) {
-            return this.post('login', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED });
         }
     }, {
         key: 'user',
@@ -192,18 +187,68 @@ var UserAPI = function (_RestURL) {
 
 exports.default = UserAPI;
 
-},{"../ott/ottrest":7}],5:[function(require,module,exports){
+},{"../ott/ottrest":8}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.projects = exports.register = exports.users = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ottrest = require('../ott/ottrest');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var V1API = function (_RestURL) {
+    _inherits(V1API, _RestURL);
+
+    function V1API() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, V1API);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = V1API.__proto__ || Object.getPrototypeOf(V1API)).call.apply(_ref, [this].concat(args))), _this), _this.scope = "/v1/", _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(V1API, [{
+        key: 'login',
+        value: function login(USERNAME, PASSWORD, STAYLOGGED) {
+            return this.post('login', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED });
+        }
+    }]);
+
+    return V1API;
+}(_ottrest.RestURL);
+
+exports.default = V1API;
+
+},{"../ott/ottrest":8}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.projects = exports.register = exports.users = exports.v1 = undefined;
 exports.setDomain = setDomain;
 
 var _ottrest = require('./ott/ottrest');
 
 var _ottrest2 = _interopRequireDefault(_ottrest);
+
+var _v = require('./api/v1');
+
+var _v2 = _interopRequireDefault(_v);
 
 var _users = require('./api/users');
 
@@ -229,11 +274,12 @@ function setDomain(domain) {
     rc.domain = domain;
 }
 
+var v1 = exports.v1 = rc.addURL(_v2.default);
 var users = exports.users = rc.addURL(_users2.default);
 var register = exports.register = rc.addURL(_register2.default);
 var projects = exports.projects = rc.addURL(_projects2.default);
 
-},{"./api/projects":2,"./api/register":3,"./api/users":4,"./ott/ottrest":7}],6:[function(require,module,exports){
+},{"./api/projects":2,"./api/register":3,"./api/users":4,"./api/v1":5,"./ott/ottrest":8}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -288,7 +334,7 @@ var RequestPool = function () {
 
 exports.default = RequestPool;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -405,7 +451,7 @@ var RestURL = exports.RestURL = function () {
     _createClass(RestURL, [{
         key: 'get',
         value: function get(url, data, cb) {
-            this.restC.request(this.scope + url, 'get', data, cb);
+            return this.restC.request(this.scope + url, 'get', data);
         }
     }, {
         key: 'post',
@@ -426,4 +472,4 @@ var RestURL = exports.RestURL = function () {
     return RestURL;
 }();
 
-},{"./ottreq":6}]},{},[1]);
+},{"./ottreq":7}]},{},[1]);
