@@ -127,7 +127,7 @@ var RegisterAPI = function (_RestURL) {
 exports.default = RegisterAPI;
 
 },{"../ott/ottrest":8}],4:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -135,7 +135,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ottrest = require('../ott/ottrest');
+var _ottrest = require("../ott/ottrest");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -161,12 +161,7 @@ var UserAPI = function (_RestURL) {
     }
 
     _createClass(UserAPI, [{
-        key: 'check',
-        value: function check() {
-            return this.post('login', { CHECK: true });
-        }
-    }, {
-        key: 'user',
+        key: "user",
         value: function user(USERID) {
             if (typeof USERID === "function" && !cb) {
                 cb = USERID;
@@ -176,7 +171,7 @@ var UserAPI = function (_RestURL) {
             return this.post('user', { USERID: USERID, TYPE: "GETOWN" });
         }
     }, {
-        key: 'set_user',
+        key: "set_user",
         value: function set_user(DATA) {
             return this.post('user', { TYPE: "SETOWN", USERID: USERID, DATA: DATA });
         }
@@ -225,6 +220,11 @@ var V1API = function (_RestURL) {
         key: 'login',
         value: function login(USERNAME, PASSWORD, STAYLOGGED) {
             return this.post('login', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED });
+        }
+    }, {
+        key: 'check',
+        value: function check() {
+            return this.post('login', { CHECK: true });
         }
     }]);
 

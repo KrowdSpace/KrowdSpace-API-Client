@@ -3,10 +3,6 @@ import {RestURL} from '../ott/ottrest';
 export default class UserAPI extends RestURL 
 {
     scope = "/v1/users/"
-    check()
-    {
-        return this.post('login', {CHECK: true});
-    }
 
     user(USERID)
     {

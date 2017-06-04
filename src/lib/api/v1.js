@@ -8,4 +8,9 @@ export default class V1API extends RestURL
     {
         return this.post('login', {USERNAME, PASSWORD, STAYLOGGED});
     }
+
+    check()
+    {
+        return this.post('login', {CHECK: true});
+    }
 }
