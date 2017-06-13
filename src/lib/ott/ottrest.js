@@ -40,7 +40,7 @@ export default class RestClient
         {
             let req = this.reqPool.takeReq();
 
-            req.open(type, `http://${this.domain + url}`);
+            req.open(type, `${this.domain + url}`);
 
             req.withCredentials = true;
             req.responseType = "json";

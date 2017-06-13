@@ -395,7 +395,7 @@ var RestClient = function () {
             return new Promise(function (resolve, reject) {
                 var req = _this.reqPool.takeReq();
 
-                req.open(type, 'http://' + (_this.domain + url));
+                req.open(type, '' + (_this.domain + url));
 
                 req.withCredentials = true;
                 req.responseType = "json";
