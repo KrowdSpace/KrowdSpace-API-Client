@@ -17,6 +17,6 @@ export default class UserAPI extends RestURL
 
     set_user(DATA)
     {
-        return this.post('user', {TYPE: "SETOWN", USERID, DATA});
+        return this.post('set_user', {DATA});
     }
 }

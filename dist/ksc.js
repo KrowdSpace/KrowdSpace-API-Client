@@ -53,6 +53,13 @@ var ProjectsAPI = function (_RestURL) {
         value: function set_project(PROJECTID, DATA) {
             return this.post('set_project', { PROJECTID: PROJECTID, DATA: DATA });
         }
+    }, {
+        key: 'explore',
+        value: function explore() {
+            var DATA = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { CATEGORY: '', OWNER: '', AGE: '', TITLE: '', LIMIT: 20, ENDTIME: '' };
+
+            return this.post('explore', DATA);
+        }
     }]);
 
     return ProjectsAPI;
@@ -173,7 +180,7 @@ var UserAPI = function (_RestURL) {
     }, {
         key: "set_user",
         value: function set_user(DATA) {
-            return this.post('user', { TYPE: "SETOWN", USERID: USERID, DATA: DATA });
+            return this.post('set_user', { DATA: DATA });
         }
     }]);
 
@@ -220,6 +227,11 @@ var V1API = function (_RestURL) {
         key: 'login',
         value: function login(USERNAME, PASSWORD, STAYLOGGED) {
             return this.post('login', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED });
+        }
+    }, {
+        key: 'logout',
+        value: function logout() {
+            return this.post('login', { LOGOUT: true });
         }
     }, {
         key: 'check',
