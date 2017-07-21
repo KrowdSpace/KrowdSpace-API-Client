@@ -54,6 +54,11 @@ var ProjectsAPI = function (_RestURL) {
             return this.post('set_project', { PROJECTID: PROJECTID, DATA: DATA });
         }
     }, {
+        key: 'update_project',
+        value: function update_project(PROJECTID) {
+            return this.post('update_project', { PROJECTID: PROJECTID });
+        }
+    }, {
         key: 'explore',
         value: function explore() {
             var DATA = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { CATEGORY: '', OWNER: '', AGE: '', TITLE: '', LIMIT: 20, ENDTIME: '' };

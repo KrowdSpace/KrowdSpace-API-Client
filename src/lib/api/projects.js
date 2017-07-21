@@ -14,6 +14,11 @@ export default class ProjectsAPI extends RestURL
         return this.post('set_project', {PROJECTID, DATA});
     }
 
+    update_project(PROJECTID)
+    {
+        return this.post('update_project', {PROJECTID});
+    }
+
     explore(DATA = {CATEGORY: '', OWNER:'', AGE:'', TITLE: '', LIMIT: 20, ENDTIME: ''})
     {
         return this.post('explore', DATA);
