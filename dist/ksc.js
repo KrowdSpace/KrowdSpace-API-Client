@@ -128,8 +128,18 @@ var RegisterAPI = function (_RestURL) {
         }
     }, {
         key: 'verify',
-        value: function verify(VERIFYCODE, cb) {
+        value: function verify(VERIFYCODE) {
             return this.post('verify', { VERIFYCODE: VERIFYCODE });
+        }
+    }, {
+        key: 'request_reset_password',
+        value: function request_reset_password(EMAIL) {
+            return this.post('request_reset_password', { EMAIL: EMAIL });
+        }
+    }, {
+        key: 'reset_password',
+        value: function reset_password(RESET_CODE, NEW_PASSWORD) {
+            return this.post('reset_password', { RESET_CODE: RESET_CODE, NEW_PASSWORD: NEW_PASSWORD });
         }
     }]);
 
