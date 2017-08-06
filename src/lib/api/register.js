@@ -24,8 +24,17 @@ export default class RegisterAPI extends RestURL
         return this.post('contact_us', { FNAME, LNAME, EMAIL, COMMENT });
     }
 
-    verify(VERIFYCODE, cb)
+    verify(VERIFYCODE)
     {
         return this.post('verify', { VERIFYCODE });
+    }
+
+    request_reset_password(EMAIL)
+    {
+        return this.post('request_reset_password', { EMAIL });
+    }
+    reset_password(RESET_CODE, NEW_PASSWORD)
+    {
+        return this.post('reset_password', { RESET_CODE, NEW_PASSWORD });
     }
 }
