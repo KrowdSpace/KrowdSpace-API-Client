@@ -258,6 +258,11 @@ var V1API = function (_RestURL) {
         value: function check() {
             return this.post('login', { CHECK: true });
         }
+    }, {
+        key: 'stats',
+        value: function stats() {
+            return this.post('stats');
+        }
     }]);
 
     return V1API;

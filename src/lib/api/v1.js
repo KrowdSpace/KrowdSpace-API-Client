@@ -18,4 +18,9 @@ export default class V1API extends RestURL
     {
         return this.post('login', {CHECK: true});
     }
+
+    stats()
+    {
+        return this.post('stats');
+    }
 }
