@@ -65,6 +65,11 @@ var ProjectsAPI = function (_RestURL) {
 
             return this.post('explore', DATA);
         }
+    }, {
+        key: 'delete',
+        value: function _delete(UNIQUE_ID) {
+            return this.post('delete', { UNIQUE_ID: UNIQUE_ID });
+        }
     }]);
 
     return ProjectsAPI;

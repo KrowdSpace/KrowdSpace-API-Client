@@ -23,4 +23,9 @@ export default class ProjectsAPI extends RestURL
     {
         return this.post('explore', DATA);
     }
+
+    delete(UNIQUE_ID)
+    {
+        return this.post('delete', {UNIQUE_ID});
+    }
 }

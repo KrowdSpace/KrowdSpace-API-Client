@@ -33,6 +33,7 @@ export default class RegisterAPI extends RestURL
     {
         return this.post('request_reset_password', { EMAIL });
     }
+    
     reset_password(RESET_CODE, NEW_PASSWORD)
     {
         return this.post('reset_password', { RESET_CODE, NEW_PASSWORD });
