@@ -6,21 +6,21 @@ export default class V1API extends RestURL
 
     login(USERNAME, PASSWORD, STAYLOGGED)
     {
-        return this.post('login', {USERNAME, PASSWORD, STAYLOGGED});
+        return this.post('login/', {USERNAME, PASSWORD, STAYLOGGED});
     }
 
     logout()
     {
-        return this.post('login', {LOGOUT: true});
+        return this.post('login/', {LOGOUT: true});
     }
 
     check()
     {
-        return this.post('login', {CHECK: true});
+        return this.post('login/', {CHECK: true});
     }
 
     stats()
     {
-        return this.post('stats');
+        return this.post('stats/');
     }
 }
