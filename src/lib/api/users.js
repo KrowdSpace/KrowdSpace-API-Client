@@ -12,11 +12,11 @@ export default class UserAPI extends RestURL
             USERID = "";
         }
             
-        return this.post('user/', {USERID, TYPE: "GETOWN"});
+        return this.post('user', {USERID, TYPE: "GETOWN"});
     }
 
     set_user(DATA)
     {
-        return this.post('set_user/', {DATA});
+        return this.post('set_user', {DATA});
     }
 }

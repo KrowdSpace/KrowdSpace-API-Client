@@ -46,17 +46,17 @@ var AdminAPI = function (_RestURL) {
     _createClass(AdminAPI, [{
         key: 'submit',
         value: function submit(PROJECTARRAY) {
-            return this.post('submit/', { PROJECTS: PROJECTARRAY });
+            return this.post('submit', { PROJECTS: PROJECTARRAY });
         }
     }, {
         key: 'remove',
         value: function remove(PROJECTARRAY) {
-            return this.post("remove/", { PROJECTS: PROJECTARRAY });
+            return this.post("remove", { PROJECTS: PROJECTARRAY });
         }
     }, {
         key: 'getComments',
         value: function getComments() {
-            return this.post("comments/");
+            return this.post("comments");
         }
     }]);
 
@@ -102,29 +102,29 @@ var ProjectsAPI = function (_RestURL) {
     _createClass(ProjectsAPI, [{
         key: 'project',
         value: function project(PROJECTID) {
-            return this.post('projects/', { PROJECTID: PROJECTID });
+            return this.post('projects', { PROJECTID: PROJECTID });
         }
     }, {
         key: 'set_project',
         value: function set_project(PROJECTID, DATA) {
-            return this.post('set_project/', { PROJECTID: PROJECTID, DATA: DATA });
+            return this.post('set_project', { PROJECTID: PROJECTID, DATA: DATA });
         }
     }, {
         key: 'update_project',
         value: function update_project(PROJECTID) {
-            return this.post('update_project/', { PROJECTID: PROJECTID });
+            return this.post('update_project', { PROJECTID: PROJECTID });
         }
     }, {
         key: 'explore',
         value: function explore() {
             var DATA = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { CATEGORY: '', OWNER: '', AGE: '', TITLE: '', LIMIT: 20, ENDTIME: '' };
 
-            return this.post('explore/', DATA);
+            return this.post('explore', DATA);
         }
     }, {
         key: 'delete',
         value: function _delete(UNIQUE_ID) {
-            return this.post('delete/', { UNIQUE_ID: UNIQUE_ID });
+            return this.post('delete', { UNIQUE_ID: UNIQUE_ID });
         }
     }]);
 
@@ -170,37 +170,37 @@ var RegisterAPI = function (_RestURL) {
     _createClass(RegisterAPI, [{
         key: 'user',
         value: function user(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, KS_USER, IG_USER) {
-            return this.post('user/', { FNAME: FNAME, LNAME: LNAME, USERNAME: USERNAME, EMAIL: EMAIL, PASSWORD: PASSWORD, KS_USER: KS_USER, IG_USER: IG_USER });
+            return this.post('user', { FNAME: FNAME, LNAME: LNAME, USERNAME: USERNAME, EMAIL: EMAIL, PASSWORD: PASSWORD, KS_USER: KS_USER, IG_USER: IG_USER });
         }
     }, {
         key: 'project',
         value: function project(data) {
-            return this.post('project/', data);
+            return this.post('project', data);
         }
     }, {
         key: 'email_list',
         value: function email_list(FNAME, LNAME, EMAIL, KSUSER, IGUSER, PVALID) {
-            return this.post('email_list/', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, KSUSER: KSUSER, IGUSER: IGUSER, PVALID: PVALID });
+            return this.post('email_list', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, KSUSER: KSUSER, IGUSER: IGUSER, PVALID: PVALID });
         }
     }, {
         key: 'contact_us',
         value: function contact_us(FNAME, LNAME, EMAIL, COMMENT) {
-            return this.post('contact_us/', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, COMMENT: COMMENT });
+            return this.post('contact_us', { FNAME: FNAME, LNAME: LNAME, EMAIL: EMAIL, COMMENT: COMMENT });
         }
     }, {
         key: 'verify',
         value: function verify(VERIFYCODE) {
-            return this.post('verify/', { VERIFYCODE: VERIFYCODE });
+            return this.post('verify', { VERIFYCODE: VERIFYCODE });
         }
     }, {
         key: 'request_reset_password',
         value: function request_reset_password(EMAIL) {
-            return this.post('request_reset_password/', { EMAIL: EMAIL });
+            return this.post('request_reset_password', { EMAIL: EMAIL });
         }
     }, {
         key: 'reset_password',
         value: function reset_password(RESET_CODE, NEW_PASSWORD) {
-            return this.post('reset_password/', { RESET_CODE: RESET_CODE, NEW_PASSWORD: NEW_PASSWORD });
+            return this.post('reset_password', { RESET_CODE: RESET_CODE, NEW_PASSWORD: NEW_PASSWORD });
         }
     }]);
 
@@ -251,12 +251,12 @@ var UserAPI = function (_RestURL) {
                 USERID = "";
             }
 
-            return this.post('user/', { USERID: USERID, TYPE: "GETOWN" });
+            return this.post('user', { USERID: USERID, TYPE: "GETOWN" });
         }
     }, {
         key: "set_user",
         value: function set_user(DATA) {
-            return this.post('set_user/', { DATA: DATA });
+            return this.post('set_user', { DATA: DATA });
         }
     }]);
 
@@ -302,22 +302,22 @@ var V1API = function (_RestURL) {
     _createClass(V1API, [{
         key: 'login',
         value: function login(USERNAME, PASSWORD, STAYLOGGED) {
-            return this.post('login/', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED });
+            return this.post('login', { USERNAME: USERNAME, PASSWORD: PASSWORD, STAYLOGGED: STAYLOGGED });
         }
     }, {
         key: 'logout',
         value: function logout() {
-            return this.post('login/', { LOGOUT: true });
+            return this.post('login', { LOGOUT: true });
         }
     }, {
         key: 'check',
         value: function check() {
-            return this.post('login/', { CHECK: true });
+            return this.post('login', { CHECK: true });
         }
     }, {
         key: 'stats',
         value: function stats() {
-            return this.post('stats/');
+            return this.post('stats');
         }
     }]);
 
