@@ -11,7 +11,7 @@ export default class AdminAPI extends RestURL
 
     remove(PROJECTARRAY)
     {
-        return this.post("remove", {PROJECTS: PROJECTARRAY});
+        return this.post("delete", {PROJECTS: PROJECTARRAY});
     }
 
     getComments()

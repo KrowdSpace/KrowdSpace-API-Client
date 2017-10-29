@@ -28,4 +28,9 @@ export default class ProjectsAPI extends RestURL
     {
         return this.post('delete', {UNIQUE_ID});
     }
+
+    purchase(PURCHASE_DATA)
+    {
+        return this.post('purchase', {PURCHASE_DATA});
+    }
 }

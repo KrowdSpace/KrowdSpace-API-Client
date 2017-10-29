@@ -51,7 +51,7 @@ var AdminAPI = function (_RestURL) {
     }, {
         key: 'remove',
         value: function remove(PROJECTARRAY) {
-            return this.post("remove", { PROJECTS: PROJECTARRAY });
+            return this.post("delete", { PROJECTS: PROJECTARRAY });
         }
     }, {
         key: 'getComments',
@@ -125,6 +125,11 @@ var ProjectsAPI = function (_RestURL) {
         key: 'delete',
         value: function _delete(UNIQUE_ID) {
             return this.post('delete', { UNIQUE_ID: UNIQUE_ID });
+        }
+    }, {
+        key: 'purchase',
+        value: function purchase(PURCHASE_DATA) {
+            return this.post('purchase', { PURCHASE_DATA: PURCHASE_DATA });
         }
     }]);
 
